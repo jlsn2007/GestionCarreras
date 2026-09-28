@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fia.eisi.poo.gestioncarreras.controller.MantenimientoCarreraController"
+      spacing="20"
+      style="-fx-background-color: #f0f2f5; -fx-padding: 25;">
+
+    <Label fx:id="tituloVentana" text="Mantenimiento de Carrera"
+       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+
+    <VBox spacing="15"
+          style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);">
+
+        <GridPane hgap="15" vgap="15">
+            <columnConstraints>
+                <ColumnConstraints minWidth="100" prefWidth="120"/>
+                <ColumnConstraints minWidth="300" prefWidth="400" hgrow="ALWAYS"/>
+            </columnConstraints>
+
+            <Label text="Código:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                   style="-fx-font-weight: bold; -fx-text-fill: #374151;"/>
+            <TextField fx:id="codigoField" 
+                       promptText="6 caracteres (ej. ISW001)"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1"
+                       style="-fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8;"/>
+
+            <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                   style="-fx-font-weight: bold; -fx-text-fill: #374151;"/>
+            <TextField fx:id="nombreField"
+                       promptText="Nombre de la carrera"
+                       GridPane.rowIndex="1" GridPane.columnIndex="1"
+                       style="-fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8;"/>
+
+            <Label text="Título:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                   style="-fx-font-weight: bold; -fx-text-fill: #374151;"/>
+            <TextField fx:id="tituloField"
+                       promptText="Título que otorga"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1"
+                       style="-fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8;"/>
+
+            <Label text="Facultad:" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                   style="-fx-font-weight: bold; -fx-text-fill: #374151;"/>
+            <ComboBox fx:id="facultadCombo"
+                      promptText="Seleccione una facultad"
+                      GridPane.rowIndex="3" GridPane.columnIndex="1"
+                      maxWidth="350"
+                      style="-fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 4;"/>
+        </GridPane>
+
+        <Label fx:id="errorLabel" text=""
+               style="-fx-text-fill: #dc2626; -fx-font-size: 12;"/>
+    </VBox>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Button fx:id="eliminarButton" text="Eliminar" onAction="#eliminar"
+                style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+
+        <Button fx:id="guardarButton" text="Guardar" onAction="#guardar" defaultButton="true"
+                style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 25; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+
+        <Button text="Cancelar" onAction="#cancelar" cancelButton="true"
+                style="-fx-background-color: #e5e7eb; -fx-text-fill: #374151; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+    </HBox>
+</VBox>

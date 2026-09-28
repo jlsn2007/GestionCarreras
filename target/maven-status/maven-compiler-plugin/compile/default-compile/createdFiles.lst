@@ -1,0 +1,7 @@
+fia\eisi\poo\gestioncarreras\model\Carrera.class
+fia\eisi\poo\gestioncarreras\controller\ConsultarCarrerasController.class
+fia\eisi\poo\gestioncarreras\model\Facultad.class
+module-info.class
+fia\eisi\poo\gestioncarreras\App.class
+fia\eisi\poo\gestioncarreras\controller\MantenimientoCarreraController.class
+fia\eisi\poo\gestioncarreras\util\Datos.class
