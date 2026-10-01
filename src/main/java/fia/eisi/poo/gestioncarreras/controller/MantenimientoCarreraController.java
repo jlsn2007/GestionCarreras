@@ -1,10 +1,11 @@
 package fia.eisi.poo.gestioncarreras.controller;
-
 import fia.eisi.poo.gestioncarreras.model.Carrera;
 import fia.eisi.poo.gestioncarreras.model.Facultad;
 import fia.eisi.poo.gestioncarreras.util.Datos;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -73,18 +74,66 @@ public class MantenimientoCarreraController {
                 return null;
             }
         });
-            
-            //CÓDIGO FALTANTE
     }
 
+    //APARTADO DEL MÉTODO O FUNCIÓN "GUARDAR" APARECE INCOMPLETO EN LA GUÍA, POR ENDE COMPLETÉ EL CÓDIGO.
+    
     @FXML
     private void guardar() {
+        
+        //Limpiar mensaje de error previo
+        errorLabel.setText("");
 
+        //Obtener valores de la interfaz
+        String codigo = codigoField.getText() != null ? codigoField.getText().trim() : "";
+        String nombre = nombreField.getText() != null ? nombreField.getText().trim() : "";
+        String titulo = tituloField.getText() != null ? tituloField.getText().trim() : "";
+        Facultad facultad = facultadCombo.getValue();
+
+        if (codigo.isEmpty() || nombre.isEmpty() || titulo.isEmpty() || facultad == null) {
+            errorLabel.setText("Por favor complete todos los campos.");
+            return;
+        }
+
+        //Crear nuevo objeto de tipo carrera
+        if (carrera == null) {
+            boolean existe = Datos.getCarreras().stream()
+                    .anyMatch(c -> c.getCodigo().equalsIgnoreCase(codigo));
+
+            if (existe) {
+                errorLabel.setText("Ya existe una carrera con ese código.");
+            } else {
+                Carrera nuevaCarrera = new Carrera(codigo, nombre, titulo, facultad);
+                Datos.agregarCarrera(nuevaCarrera);
+                cerrar();
+            }
+        } 
+        //Actulizar datos
+        else {
+            carrera.setNombre(nombre);
+            carrera.setTitulo(titulo);
+            carrera.setFacultad(facultad);
+            cerrar();
+        }
     }
 
     @FXML
     private void eliminar() {
-//FALTA ESTE APARTADO DE CÓDIGO
+        if (carrera == null){
+            return;
+        }
+        
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+            "¿Está seguro de eliminar la carrera \"" + carrera.getNombre() + "\"?",
+            ButtonType.YES, ButtonType.NO);
+        confirm.setTitle("Confirmar eliminacion");
+        confirm.setHeaderText(null);
+        confirm.showAndWait().ifPresent(bt-> {
+            if (bt == ButtonType.YES){
+                Datos.eliminarCarrera(carrera);
+                cerrar();
+            }
+        });
     }
 
     @FXML
